@@ -137,4 +137,8 @@ public class Parser {
     private void error(String mensaje) {
         throw new RuntimeException("Error Sintáctico/Semántico: " + mensaje);
     }
+    // Método para extraer la tabla y verla desde fuera
+    public TablaSimbolos getTablaSimbolos() {
+        return tablaSimbolos;
+    }
 }

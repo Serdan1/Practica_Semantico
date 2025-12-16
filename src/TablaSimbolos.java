@@ -55,4 +55,23 @@ public class TablaSimbolos {
             throw new RuntimeException("Error semántico: La variable '" + nombre + "' se está usando sin haber sido inicializada. [cite: 232]");
         }
     }
+    @Override
+    public String toString() {
+        if (tabla.isEmpty()) {
+            return "   [Tabla de Símbolos vacía]";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("   === Tabla de Símbolos ===\n");
+        sb.append("   Variable | Tipo | Inicializada\n");
+        sb.append("   ------------------------------\n");
+
+        for (Map.Entry<String, Identificador> entry : tabla.entrySet()) {
+            sb.append(String.format("   %-8s | %-4s | %s\n",
+                    entry.getKey(),
+                    entry.getValue().tipo,
+                    entry.getValue().inicializada));
+        }
+        return sb.toString();
+    }
 }
