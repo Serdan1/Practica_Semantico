@@ -2,27 +2,28 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Ejemplo que debería funcionar sintácticamente
-        // Nota: Sintácticamente es correcto usar 'x' sin declararla, 
-        // pero la Práctica 4 (Semántico) nos obligará a arreglar eso.
-        String codigo = "int x; x = 5; print(x + 10);";
+        // PRUEBA 1: Código Correcto
+        System.out.println("--- TEST 1: Código Correcto ---");
+        probar("int x; x = 5; print(x + 10);");
 
+        // PRUEBA 2: Error semántico (Variable no declarada)
+        System.out.println("\n--- TEST 2: Variable no declarada ---");
+        probar("x = 5;");
+
+        // PRUEBA 3: Error semántico (Uso sin inicializar)
+        System.out.println("\n--- TEST 3: Variable sin inicializar ---");
+        probar("int y; print(y);");
+    }
+
+    static void probar(String codigo) {
         try {
             Lexer lexer = new Lexer();
             List<Token> tokens = lexer.escanear(codigo);
-
-            System.out.println("--- Tokens Generados ---");
-            for (Token t : tokens) {
-                System.out.println(t);
-            }
-
-            System.out.println("\n--- Análisis Sintáctico ---");
             Parser parser = new Parser(tokens);
             parser.parse();
-            System.out.println("¡El código es sintácticamente correcto!");
-
+            System.out.println(">> Compilación exitosa.");
         } catch (Exception e) {
-            System.err.println(e.getMessage());
+            System.err.println(">> " + e.getMessage());
         }
     }
 }
